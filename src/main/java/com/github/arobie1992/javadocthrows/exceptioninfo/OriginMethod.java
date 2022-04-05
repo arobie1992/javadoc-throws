@@ -1,5 +1,6 @@
 package com.github.arobie1992.javadocthrows.exceptioninfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -15,7 +16,7 @@ public class OriginMethod {
         this.packageName = packageName;
         this.className = className;
         this.methodName = methodName;
-        this.parameterList = parameterList;
+        this.parameterList = new ArrayList<>(parameterList);
     }
 
     public String getPackageName() {

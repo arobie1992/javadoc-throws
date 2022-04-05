@@ -9,7 +9,8 @@ public class CheckedTestFile {
     public void noDocPublicMethod() {}
 
     /**
-     *
+     * Test doc comment
+     * Hi
      */
     public void noThrowsPublicMethod() {}
 
@@ -123,5 +124,30 @@ public class CheckedTestFile {
 
     /* This is a block comment above a method */
     public void blockComment() {}
+
+    /**
+     * Javadoc comment
+     */
+    //non-doc comment
+    public void commentBetweenDocAndMethod() {}
+
+    /**
+     * /**
+     */
+    public void docWithDocStartSeq() {}
+
+    /*
+     *
+     */
+    public void multilineBlockComment() {}
+
+    /**
+     * Returns the input {@link String}.
+     * @param s
+     * @return s
+     */
+    public String testArgAndReturn(String s) {
+        return s;
+    }
 
 }

@@ -5,19 +5,13 @@ import java.util.Objects;
 public class Parameter {
 
     private final String typeName;
-    private final String name;
 
-    public Parameter(String typeName, String parameterName) {
+    public Parameter(String typeName) {
         this.typeName = typeName;
-        this.name = parameterName;
     }
 
     public String getTypeName() {
         return typeName;
-    }
-
-    public String getName() {
-        return name;
     }
 
     @Override
@@ -25,16 +19,16 @@ public class Parameter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Parameter parameter = (Parameter) o;
-        return typeName.equals(parameter.typeName) && name.equals(parameter.name);
+        return typeName.equals(parameter.typeName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(typeName, name);
+        return Objects.hash(typeName);
     }
 
     @Override
     public String toString() {
-        return "<" + typeName + " " + name + ">";
+        return typeName;
     }
 }

@@ -73,11 +73,6 @@ public class ResultsWriter {
                 Parameter p1 = itr1.next();
                 Parameter p2 = itr2.next();
 
-                int nCmp = p1.getName().compareTo(p2.getName());
-                if(nCmp != 0) {
-                    return nCmp;
-                }
-
                 int tCmp = p1.getTypeName().compareTo(p2.getTypeName());
                 if(tCmp != 0) {
                     return tCmp;
