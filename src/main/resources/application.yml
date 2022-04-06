@@ -1,4 +1,0 @@
-output:
-  file-path: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/out/test-out.txt"
-target-class: com.github.arobie1992.javadocthrows.test.helpers.CheckedTestFile
-sources-root: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/src/test/java/com/github/arobie1992/javadocthrows/test/"
