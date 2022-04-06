@@ -1,7 +1,7 @@
-package javadocthrows.file;
+package com.github.arobie1992.javadocthrows.crosschecker.file;
 
-import javadocthrows.exceptioninfo.OriginMethod;
-import javadocthrows.exceptioninfo.Parameter;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.OriginMethod;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.Parameter;
 
 import java.util.ArrayList;
 import java.util.List;

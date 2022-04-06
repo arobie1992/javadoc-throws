@@ -1,10 +1,10 @@
-package javadocthrows;
+package com.github.arobie1992.javadocthrows.crosschecker;
 
-import javadocthrows.exceptioninfo.DocExceptionInformation;
-import javadocthrows.exceptioninfo.SymbolicExecutionExceptionInformation;
-import javadocthrows.file.DocExceptionExtractor;
-import javadocthrows.file.FileProperties;
-import javadocthrows.writer.ResultsWriter;
+import com.github.arobie1992.javadocthrows.crosschecker.file.DocExceptionExtractor;
+import com.github.arobie1992.javadocthrows.crosschecker.file.FileProperties;
+import com.github.arobie1992.javadocthrows.crosschecker.writer.ResultsWriter;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.DocExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.SymbolicExecutionExceptionInformation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package javadocthrows.file;
+package com.github.arobie1992.javadocthrows.crosschecker.file;
 
 import org.springframework.stereotype.Component;
 

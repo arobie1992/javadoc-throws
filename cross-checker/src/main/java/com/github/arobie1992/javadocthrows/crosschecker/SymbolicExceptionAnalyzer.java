@@ -1,7 +1,7 @@
-package javadocthrows;
+package com.github.arobie1992.javadocthrows.crosschecker;
 
-import javadocthrows.exceptioninfo.OriginMethod;
-import javadocthrows.exceptioninfo.SymbolicExecutionExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.OriginMethod;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.SymbolicExecutionExceptionInformation;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

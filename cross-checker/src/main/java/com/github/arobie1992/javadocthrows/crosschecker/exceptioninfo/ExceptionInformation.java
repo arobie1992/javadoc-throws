@@ -1,4 +1,4 @@
-package javadocthrows.exceptioninfo;
+package com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo;
 
 abstract class ExceptionInformation {
 

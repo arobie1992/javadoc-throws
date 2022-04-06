@@ -1,6 +1,6 @@
-package javadocthrows.file;
+package com.github.arobie1992.javadocthrows.crosschecker.file;
 
-import javadocthrows.exceptioninfo.DocExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.DocExceptionInformation;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

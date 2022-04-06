@@ -1,6 +1,6 @@
-package javadocthrows.test.helpers;
+package com.github.arobie1992.javadocthrows.crosschecker.helpers;
 
-import javadocthrows.test.helpers.exception.CustomRuntimeException;
+import com.github.arobie1992.javadocthrows.crosschecker.helpers.exception.CustomRuntimeException;
 
 public class CheckedTestFile {
 

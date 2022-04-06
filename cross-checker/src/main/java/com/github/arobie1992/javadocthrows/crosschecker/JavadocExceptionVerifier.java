@@ -1,9 +1,9 @@
-package javadocthrows;
+package com.github.arobie1992.javadocthrows.crosschecker;
 
-import javadocthrows.exceptioninfo.DocExceptionInformation;
-import javadocthrows.exceptioninfo.SymbolicExecutionExceptionInformation;
-import javadocthrows.exceptioninfo.UndeclaredExceptionInformation;
-import javadocthrows.exceptioninfo.UnthrownExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.DocExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.SymbolicExecutionExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.UndeclaredExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.UnthrownExceptionInformation;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;

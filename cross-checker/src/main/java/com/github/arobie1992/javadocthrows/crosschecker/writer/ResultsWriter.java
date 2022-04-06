@@ -1,10 +1,10 @@
-package javadocthrows.writer;
+package com.github.arobie1992.javadocthrows.crosschecker.writer;
 
-import javadocthrows.JavadocExceptionVerifier;
-import javadocthrows.exceptioninfo.OriginMethod;
-import javadocthrows.exceptioninfo.Parameter;
-import javadocthrows.exceptioninfo.UndeclaredExceptionInformation;
-import javadocthrows.exceptioninfo.UnthrownExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.JavadocExceptionVerifier;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.OriginMethod;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.Parameter;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.UndeclaredExceptionInformation;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.UnthrownExceptionInformation;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

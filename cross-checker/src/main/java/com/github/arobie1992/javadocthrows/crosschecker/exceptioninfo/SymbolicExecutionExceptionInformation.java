@@ -1,4 +1,4 @@
-package javadocthrows.exceptioninfo;
+package com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo;
 
 public final class SymbolicExecutionExceptionInformation extends ExceptionInformation {
     public SymbolicExecutionExceptionInformation(Class<? extends RuntimeException> exception, OriginMethod originMethod) {

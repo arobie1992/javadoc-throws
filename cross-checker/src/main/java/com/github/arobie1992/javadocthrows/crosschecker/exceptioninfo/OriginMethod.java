@@ -1,4 +1,4 @@
-package javadocthrows.exceptioninfo;
+package com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo;
 
 import java.util.ArrayList;
 import java.util.List;
