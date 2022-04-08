@@ -9,21 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cross-checker</artifactId>
+    <artifactId>test-executable</artifactId>
 
     <properties>
+        <start-class>com.github.arobie.javadocthrows.testexe.TestFile</start-class>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>jbse</groupId>
-            <artifactId>jbse</artifactId>
-            <version>0.10.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/jbse-0.10.0-SNAPSHOT-shaded.jar</systemPath>
-        </dependency>
-    </dependencies>
 
 </project>

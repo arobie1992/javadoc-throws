@@ -6,7 +6,8 @@
 	<modules>
 		<module>cross-checker</module>
         <module>doclet</module>
-    </modules>
+		<module>test-executable</module>
+	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

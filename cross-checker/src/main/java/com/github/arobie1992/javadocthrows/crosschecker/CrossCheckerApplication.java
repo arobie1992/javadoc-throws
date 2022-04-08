@@ -2,6 +2,7 @@ package com.github.arobie1992.javadocthrows.crosschecker;
 
 import com.github.arobie1992.javadocthrows.crosschecker.file.DocExceptionExtractor;
 import com.github.arobie1992.javadocthrows.crosschecker.file.FileProperties;
+import com.github.arobie1992.javadocthrows.crosschecker.symbolicexecutor.SymbolicExceptionAnalyzer;
 import com.github.arobie1992.javadocthrows.crosschecker.writer.ResultsWriter;
 import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.DocExceptionInformation;
 import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.SymbolicExecutionExceptionInformation;
@@ -48,8 +49,7 @@ public class CrossCheckerApplication {
 
 	@PostConstruct
 	public void run() {
-		List<SymbolicExecutionExceptionInformation> symbolicExceptions =
-				symbolicExceptionAnalyzer.evaluateProgram(new SymbolicExceptionAnalyzer.Properties());
+		List<SymbolicExecutionExceptionInformation> symbolicExceptions = symbolicExceptionAnalyzer.evaluateProgram();
 
 		List<DocExceptionInformation> docExceptions = null;
 		try {
