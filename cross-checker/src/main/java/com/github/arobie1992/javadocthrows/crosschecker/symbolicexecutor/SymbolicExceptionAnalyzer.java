@@ -1,16 +1,18 @@
 package com.github.arobie1992.javadocthrows.crosschecker.symbolicexecutor;
 
 import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.OriginMethod;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.Parameter;
 import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.SymbolicExecutionExceptionInformation;
 import jbse.apps.run.Run;
 import jbse.apps.run.RunParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static jbse.apps.run.RunParameters.DecisionProcedureType.Z3;
 import static jbse.apps.run.RunParameters.StateFormatMode.TEXT;
@@ -28,8 +30,9 @@ public class SymbolicExceptionAnalyzer {
 
     private final Properties properties;
     private final Run run;
+    private final OutputFileReader outputFileReader;
 
-    public SymbolicExceptionAnalyzer(Properties properties) {
+    public SymbolicExceptionAnalyzer(Properties properties, OutputFileReader outputFileReader) {
         this.properties = properties;
         RunParameters runParameters = new RunParameters();
         runParameters.setJBSELibPath(JBSE_PATH);
@@ -45,30 +48,32 @@ public class SymbolicExceptionAnalyzer {
         runParameters.setOutputFilePath(OUTPUT_FILE_PATH);
         runParameters.addUserClasspath(properties.userClasspath);
         run = new Run(runParameters);
+        this.outputFileReader = outputFileReader;
     }
 
-    public List<SymbolicExecutionExceptionInformation> evaluateProgram() {
+    public List<SymbolicExecutionExceptionInformation> evaluateProgram() throws IOException {
         run.run();
-        return Arrays.asList(
-                new SymbolicExecutionExceptionInformation(
-                        IllegalStateException.class,
-                        new OriginMethod(
-                                "com.github.arobie.test",
-                                "TestClassA",
-                                "testMethod",
-                                Collections.emptyList()
-                        )
-                ),
-                new SymbolicExecutionExceptionInformation(
-                        NullPointerException.class,
-                        new OriginMethod(
-                                "com.github.arobie.test",
-                                "TestClassA",
-                                "testMethod",
-                                Collections.emptyList()
-                        )
-                )
-        );
+        List<String> thrownExs = outputFileReader.readExceptionsFromFile(OUTPUT_FILE_PATH);
+        return thrownExs.stream().map(e -> {
+            String containingClass = properties.targetMethod.containingClass.replaceAll("/", ".");
+            int pkgSep = containingClass.lastIndexOf('.');
+
+            return new SymbolicExecutionExceptionInformation(e, new OriginMethod(
+                    containingClass.substring(0, pkgSep),
+                    containingClass.substring(pkgSep + 1),
+                    properties.targetMethod.name,
+                    getParamsList()
+            ));
+        }).collect(Collectors.toList());
+    }
+
+    private List<Parameter> getParamsList() {
+        String descriptor = properties.targetMethod.descriptor;
+        int end = descriptor.indexOf(')');
+        String argsStr = descriptor.substring(1, end);
+        String[] args = argsStr.split(",");
+        //TODO add translation from descriptor type to Javadoc style name
+        return Arrays.stream(args).filter(a -> a != null && !a.isEmpty()).map(a -> new Parameter(a)).collect(Collectors.toList());
     }
 
     @Component

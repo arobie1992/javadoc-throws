@@ -49,7 +49,12 @@ public class CrossCheckerApplication {
 
 	@PostConstruct
 	public void run() {
-		List<SymbolicExecutionExceptionInformation> symbolicExceptions = symbolicExceptionAnalyzer.evaluateProgram();
+		List<SymbolicExecutionExceptionInformation> symbolicExceptions = null;
+		try {
+			symbolicExceptions = symbolicExceptionAnalyzer.evaluateProgram();
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		}
 
 		List<DocExceptionInformation> docExceptions = null;
 		try {
