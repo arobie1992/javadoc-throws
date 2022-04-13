@@ -38,18 +38,10 @@ public class DescriptorUtils {
             case "void":
                 return "V";
             default:
-                StringBuilder sb = new StringBuilder();
-                if(type.endsWith("]")) {
-                    for(int i = type.length() - 1; i >=0; i--) {
-                        if(type.charAt(i) != ']') {
-                            break;
-                        }
-                        sb.append('[');
-                    }
-                    sb.append(toDescriptor(type.substring(0, type.indexOf('['))));
-                    return sb.toString();
+                if(type.endsWith("[]")) {
+                    return "[" + toDescriptor(type.substring(0, type.lastIndexOf('[')));
                 } else {
-                    return "L" + type.replaceAll("\\.", "/");
+                    return "L" + type.replaceAll("\\.", "/") + ";";
                 }
         }
     }
