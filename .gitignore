@@ -1,8 +1,7 @@
 .classpath
-.project
-.settings
 HELP.md
 target/
-mvnw
-mvnw.cmd
 .mvn/
+.idea/
+*.iml
+out/
