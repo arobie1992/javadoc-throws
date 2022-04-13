@@ -2,6 +2,9 @@ package com.github.arobie.javadocthrows.testexe;
 
 public class TestFile {
 
+    /**
+     * This is a test javadoc
+     */
     public void noExceptionsNoDoc() {}
 
     public void catchEx() {

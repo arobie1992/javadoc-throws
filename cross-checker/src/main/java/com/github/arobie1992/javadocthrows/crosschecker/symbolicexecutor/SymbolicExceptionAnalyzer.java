@@ -1,5 +1,6 @@
 package com.github.arobie1992.javadocthrows.crosschecker.symbolicexecutor;
 
+import com.github.arobie1992.javadocthrows.crosschecker.analysis.AnalysisProperties;
 import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.OriginMethod;
 import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.Parameter;
 import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.SymbolicExecutionExceptionInformation;
@@ -29,97 +30,49 @@ public class SymbolicExceptionAnalyzer {
     private static final Pattern EXCEPTION_EXTRACTOR_PATTERN = Pattern.compile("Class\\[\\(\\d, (.*)\\)\\]: \\{");
 
     private final Properties properties;
-    private final Run run;
     private final OutputFileReader outputFileReader;
 
     public SymbolicExceptionAnalyzer(Properties properties, OutputFileReader outputFileReader) {
         this.properties = properties;
+        this.outputFileReader = outputFileReader;
+    }
+
+    private Run createRun(AnalysisProperties analysisProperties) {
         RunParameters runParameters = new RunParameters();
         runParameters.setJBSELibPath(JBSE_PATH);
         runParameters.setStateFormatMode(TEXT);
         runParameters.setStepShowMode(LEAVES);
         runParameters.setDecisionProcedureType(Z3);
-        runParameters.setExternalDecisionProcedurePath(properties.z3Location);
+        runParameters.setExternalDecisionProcedurePath(properties.getZ3Location());
         runParameters.setMethodSignature(
-                properties.targetMethod.containingClass,
-                properties.targetMethod.descriptor,
-                properties.targetMethod.name
+                analysisProperties.getClassName(),
+                analysisProperties.getMethodDescriptor(),
+                analysisProperties.getMethodName()
         );
         runParameters.setOutputFilePath(OUTPUT_FILE_PATH);
-        runParameters.addUserClasspath(properties.userClasspath);
-        run = new Run(runParameters);
-        this.outputFileReader = outputFileReader;
+        runParameters.addUserClasspath(analysisProperties.getClasspath());
+        return new Run(runParameters);
     }
 
-    public List<SymbolicExecutionExceptionInformation> evaluateProgram() throws IOException {
-        run.run();
+    public List<SymbolicExecutionExceptionInformation> evaluateProgram(AnalysisProperties analysisProperties) throws IOException {
+        createRun(analysisProperties).run();
         List<String> thrownExs = outputFileReader.readExceptionsFromFile(OUTPUT_FILE_PATH);
         return thrownExs.stream().map(e -> {
-            String containingClass = properties.targetMethod.containingClass.replaceAll("/", ".");
-            int pkgSep = containingClass.lastIndexOf('.');
+            int pkgSep = analysisProperties.getClassName().lastIndexOf('/');
 
             return new SymbolicExecutionExceptionInformation(e, new OriginMethod(
-                    containingClass.substring(0, pkgSep),
-                    containingClass.substring(pkgSep + 1),
-                    properties.targetMethod.name,
-                    getParamsList()
+                    analysisProperties.getClassName().substring(0, pkgSep),
+                    analysisProperties.getClassName().substring(pkgSep + 1),
+                    analysisProperties.getMethodName(),
+                    analysisProperties.getParameters().stream().map(Parameter::new).collect(Collectors.toList())
             ));
         }).collect(Collectors.toList());
     }
 
-    private List<Parameter> getParamsList() {
-        String descriptor = properties.targetMethod.descriptor;
-        int end = descriptor.indexOf(')');
-        String argsStr = descriptor.substring(1, end);
-        String[] args = argsStr.split(",");
-        //TODO add translation from descriptor type to Javadoc style name
-        return Arrays.stream(args).filter(a -> a != null && !a.isEmpty()).map(a -> new Parameter(a)).collect(Collectors.toList());
-    }
-
     @Component
-    @ConfigurationProperties("static-analyzer")
+    @ConfigurationProperties("javadoc-throws.cross-checker.jbse")
     public static class Properties {
-        private String userClasspath;
         private String z3Location;
-        private TargetMethod targetMethod;
-
-        public static class TargetMethod {
-            private String containingClass;
-            private String descriptor;
-            private String name;
-
-            public String getContainingClass() {
-                return containingClass;
-            }
-
-            public void setContainingClass(String containingClass) {
-                this.containingClass = containingClass;
-            }
-
-            public String getDescriptor() {
-                return descriptor;
-            }
-
-            public void setDescriptor(String descriptor) {
-                this.descriptor = descriptor;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-        }
-
-        public String getUserClasspath() {
-            return userClasspath;
-        }
-
-        public void setUserClasspath(String userClasspath) {
-            this.userClasspath = userClasspath;
-        }
 
         public String getZ3Location() {
             return z3Location;
@@ -127,14 +80,6 @@ public class SymbolicExceptionAnalyzer {
 
         public void setZ3Location(String z3Location) {
             this.z3Location = z3Location;
-        }
-
-        public TargetMethod getTargetMethod() {
-            return targetMethod;
-        }
-
-        public void setTargetMethod(TargetMethod targetMethod) {
-            this.targetMethod = targetMethod;
         }
     }
 
