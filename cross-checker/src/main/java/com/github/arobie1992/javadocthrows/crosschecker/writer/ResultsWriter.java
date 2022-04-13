@@ -30,13 +30,13 @@ public class ResultsWriter {
             writer.write("Method: " + mei.originMethod + System.lineSeparator());
             writer.write("Potentially throws the following exceptions but does not declare them:" + System.lineSeparator());
             for(UndeclaredExceptionInformation e : mei.undeclaredExceptions) {
-                writer.write("\t" + e.exception().getCanonicalName() + System.lineSeparator());
+                writer.write("\t" + e.exception() + System.lineSeparator());
             }
 
             writer.write("Declares the following exceptions but does not throw them:" + System.lineSeparator());
 
             for(UnthrownExceptionInformation e : mei.unthrownExceptions) {
-                writer.write("\t" + e.exception().getCanonicalName() + System.lineSeparator());
+                writer.write("\t" + e.exception() + System.lineSeparator());
             }
         }
     }

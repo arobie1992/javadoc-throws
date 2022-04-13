@@ -16,17 +16,17 @@ import java.util.stream.Collectors;
 public class JavadocExceptionVerifier {
 
     public DocDiff compare(Collection<DocExceptionInformation> docExceptions, List<SymbolicExecutionExceptionInformation> symbolicExceptions) {
-        Map<Class<? extends RuntimeException>, List<DocExceptionInformation>> distinctDocExceptions = docExceptions.stream()
+        Map<String, List<DocExceptionInformation>> distinctDocExceptions = docExceptions.stream()
                 .collect(Collectors.groupingBy(DocExceptionInformation::exception));
 
-        Map<Class<? extends RuntimeException>, List<SymbolicExecutionExceptionInformation>> distinctSymbolicExceptions = symbolicExceptions
+        Map<String, List<SymbolicExecutionExceptionInformation>> distinctSymbolicExceptions = symbolicExceptions
                 .stream().collect(Collectors.groupingBy(SymbolicExecutionExceptionInformation::exception));
 
-        Map<Class<? extends RuntimeException>, List<SymbolicExecutionExceptionInformation>> undeclardExceptions =
+        Map<String, List<SymbolicExecutionExceptionInformation>> undeclardExceptions =
                 new HashMap<>(distinctSymbolicExceptions);
         distinctDocExceptions.keySet().forEach(undeclardExceptions::remove);
 
-        Map<Class<? extends RuntimeException>, List<DocExceptionInformation>> unthrownExceptions = new HashMap<>(distinctDocExceptions);
+        Map<String, List<DocExceptionInformation>> unthrownExceptions = new HashMap<>(distinctDocExceptions);
         distinctSymbolicExceptions.keySet().forEach(unthrownExceptions::remove);
 
         return new DocDiff(
