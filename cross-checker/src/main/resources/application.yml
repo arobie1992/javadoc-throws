@@ -1,12 +1,12 @@
-output:
-  file-path: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/out/test-out.txt"
-target-class: com.github.arobie1992.javadocthrows.test.helpers.CheckedTestFile
-sources-root: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/cross-checker/src/test/java"
-
-static-analyzer:
-  userclasspath: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/test-executable/target/classes"
-  z3-location: "/Users/Andrew/Desktop/programming/java/cs591-23/z3-4.8.14-x64-osx-10.16/bin/z3"
-  target-method:
-    containing-class: "com/github/arobie/javadocthrows/testexe/TestFile"
-    descriptor: "()V"
-    name: "throwCustomException"
+javadoc-throws:
+  cross-checker:
+    output-file: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/out/test-out.txt"
+    jbse:
+      z3-location: "/Users/Andrew/Desktop/programming/java/cs591-23/z3-4.8.14-x64-osx-10.16/bin/z3"
+    analysis:
+      sourceRoot: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/test-executable/src/main/java"
+      classpath: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/test-executable/target/classes"
+      className: "com/github/arobie/javadocthrows/testexe/TestFile"
+      methodName: "throwCustomException"
+      parameters: []
+      returnType: "void"

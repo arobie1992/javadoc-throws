@@ -13,7 +13,7 @@ public class OriginMethod {
     private final List<Parameter> parameterList;
 
     public OriginMethod(String packageName, String className, String methodName, List<Parameter> parameterList) {
-        this.packageName = packageName;
+        this.packageName = packageName.replaceAll("/", ".");
         this.className = className;
         this.methodName = methodName;
         this.parameterList = new ArrayList<>(parameterList);

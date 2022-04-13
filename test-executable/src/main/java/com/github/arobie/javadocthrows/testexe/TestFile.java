@@ -2,6 +2,9 @@ package com.github.arobie.javadocthrows.testexe;
 
 public class TestFile {
 
+    /**
+     * This is a test javadoc
+     */
     public void noExceptionsNoDoc() {}
 
     public void catchEx() {
@@ -41,6 +44,9 @@ public class TestFile {
 
     public static class CustomException extends RuntimeException {}
 
+    /**
+     * @throws CustomException
+     */
     public void throwCustomException() {
         throw new CustomException();
     }
