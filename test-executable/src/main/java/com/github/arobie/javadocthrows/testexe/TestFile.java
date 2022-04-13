@@ -44,6 +44,9 @@ public class TestFile {
 
     public static class CustomException extends RuntimeException {}
 
+    /**
+     * @throws CustomException
+     */
     public void throwCustomException() {
         throw new CustomException();
     }
