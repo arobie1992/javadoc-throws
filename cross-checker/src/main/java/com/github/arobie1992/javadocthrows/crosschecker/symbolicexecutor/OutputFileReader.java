@@ -22,7 +22,7 @@ public class OutputFileReader {
                 Matcher m = UNCHECKED_EX_PATTERN.matcher(line);
                 if(m.matches()) {
                     String thrownEx = m.group(1);
-                    exs.add(thrownEx.replaceAll("/", "."));
+                    exs.add(thrownEx.replaceAll("/", ".").replaceAll("\\$", "."));
                 }
             }
         }
