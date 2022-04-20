@@ -1,6 +1,7 @@
 package com.github.arobie1992.javadocthrows.crosschecker;
 
 import com.github.arobie1992.javadocthrows.crosschecker.analysis.AnalysisProperties;
+import com.github.arobie1992.javadocthrows.crosschecker.exceptioninfo.Parameter;
 import com.github.arobie1992.javadocthrows.crosschecker.file.DocExceptionExtractor;
 import com.github.arobie1992.javadocthrows.crosschecker.file.FileProperties;
 import com.github.arobie1992.javadocthrows.crosschecker.symbolicexecutor.SymbolicExceptionAnalyzer;
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class CrossCheckerApplication {
@@ -58,6 +60,8 @@ public class CrossCheckerApplication {
 		try {
 			FileProperties p = new FileProperties()
 					.analyzedClass(analysisProperties.getClassName().replaceAll("/", "."))
+					.analyzedMethodName(analysisProperties.getMethodName())
+					.analyzedMethodParameters(analysisProperties.getParameters().stream().map(Parameter::new).collect(Collectors.toList()))
 					.sourceRoot(analysisProperties.getSourceRoot())
 					.simplifiedFile("out/simplified.txt");
 			docExceptions = docExceptionExtractor.readExceptions(p);

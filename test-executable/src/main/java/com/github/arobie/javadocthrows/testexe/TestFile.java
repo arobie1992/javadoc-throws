@@ -2,53 +2,88 @@ package com.github.arobie.javadocthrows.testexe;
 
 public class TestFile {
 
-    /**
-     * This is a test javadoc
-     */
-    public void noExceptionsNoDoc() {}
+    public void noException() {}
 
-    public void catchEx() {
-        try {
-            throwEx();
-        } catch(RuntimeException e) {
-            System.out.println("Got error");
-            e.printStackTrace(System.out);
-        }
-    }
-
-    public void throwEx() {
+    public void exception() {
         throw new RuntimeException();
     }
 
-    public void throwsExceptionNoDoc(boolean shouldThrow) {
+    /**
+     * @throws RuntimeException description
+     */
+    public void exceptionUnqualifiedDoc() {
+        throw new RuntimeException();
+    }
+
+    /**
+     * @throws java.lang.RuntimeException description
+     */
+    public void exceptionFullyQualifiedDoc() {
+        throw new RuntimeException();
+    }
+
+    /**
+     * @throws java.lang.RuntimeException
+     */
+    public void exceptionNoDescription() {
+        throw new RuntimeException();
+    }
+
+
+    public void catchException() {
+        try {
+            exception();
+        } catch(RuntimeException e) {
+            System.out.println("Got error");
+        }
+    }
+
+    public void conditionalThrow(boolean shouldThrow) {
         if(shouldThrow) {
             throw new RuntimeException();
         }
     }
 
-    public boolean unsafeEquals(Boolean b1, boolean b2) {
-        return eq(b1, b2);
-    }
-
-    public boolean equals(Boolean b1, boolean b2) {
-        if(b1 != null) {
-            return eq(b1, b2);
-        } else {
-            return false;
+    /**
+     * @throws java.lang.RuntimeException description
+     */
+    public void conditionalThrowWithDoc(boolean shouldThrow) {
+        if(shouldThrow) {
+            throw new RuntimeException();
         }
     }
 
-    private boolean eq(boolean b1, boolean b2) {
-        return b1 == b2;
-    }
+    /**
+     * @throws java.lang.RuntimeException description
+     */
+    public void declaresNotThrown() {}
 
     public static class CustomException extends RuntimeException {}
 
-    /**
-     * @throws java.lang.RuntimeException never throws
-     */
-    public void throwCustomException() {
+    public void customException() {
         throw new CustomException();
+    }
+
+    /**
+     * @throws com.github.arobie.javadocthrows.testexe.TestFile.CustomException description
+     */
+    public void customExceptionDoc() {
+        throw new CustomException();
+    }
+
+    /**
+     * @throws com.github.arobie.javadocthrows.testexe.TestFile.CustomException description
+     */
+    public void declaresCustomException() {}
+
+    //should hit NullPointerException when s is null, but gets out of memory error
+    public boolean stateSpaceExplosion(String s, char c) {
+        for(char sc : s.toCharArray()) {
+            if(c == sc) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
