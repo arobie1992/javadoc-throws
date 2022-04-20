@@ -10,7 +10,7 @@ javadoc-throws:
       methodName: "noException"
       parameters: []
 #        - boolean
-      returnType: "boolean"
+      returnType: "void"
 #      methodName: "stateSpaceExplosion"
 #      parameters:
 #        - java.lang.String
