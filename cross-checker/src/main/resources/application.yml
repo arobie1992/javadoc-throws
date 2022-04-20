@@ -7,6 +7,12 @@ javadoc-throws:
       sourceRoot: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/test-executable/src/main/java"
       classpath: "/Users/Andrew/Desktop/programming/java/cs591-23/javadoc-throws/test-executable/target/classes"
       className: "com/github/arobie/javadocthrows/testexe/TestFile"
-      methodName: "throwCustomException"
+      methodName: "noException"
       parameters: []
+#        - boolean
       returnType: "void"
+#      methodName: "stateSpaceExplosion"
+#      parameters:
+#        - java.lang.String
+#        - char
+#      returnType: "boolean"
